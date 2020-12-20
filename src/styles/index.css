@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html,
+    body,
+    div#__next {
+        @apply h-full flex flex-col;
+    }
+    header {
+        @apply h-20 flex flex-none justify-between px-4 border-b items-center;
+    }
+
+    h1 {
+        @apply font-bold text-3xl;
+    }
+
+    h2 {
+        @apply font-bold text-xl;
+    }
+
+    h3 {
+        @apply font-bold text-base;
+    }
+
+    input[type='text'],
+    input[type='email'],
+    input[type='password'],
+    textarea,
+    select {
+        @apply p-2 border rounded-sm min-w-20 box-border;
+    }
+
+    input:not(:last-child) {
+        @apply mb-4;
+    }
+
+    label {
+        @apply font-semibold mb-1;
+    }
+}
+
+@layer components {
+    .btn {
+        @apply min-h-10 py-2 p-4 border border-black rounded-sm min-w-20;
+    }
+
+    .btn-primary {
+        @apply bg-primary;
+    }
+}
+
+@layer utilities {
+}

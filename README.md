@@ -1,30 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js Prisma Tailwind Starter
 
-## Getting Started
+This is a Next.js application using Prisma for an ORM and Tailwind for a css framework. It is setup how I like, so I use this as a starter for projects that I want to work on.
 
-First, run the development server:
+### To get this running on your machine:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+1. `npm i`
+2. Create a file called `dev.db` in the prisma folder. (Edit the db url in schema.prisma to change)
+3. `npx prisma migrate dev --preview-feature` to build db and generate client types.
+4. `npm run dev`
+5. `npx prisma studio` to see your db.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Other features:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+-   Authentication is handled by [NextAuth.js](https://next-auth.js.org/) passwordless login.
+-   [React Toastify](https://fkhadra.github.io/react-toastify/introduction) creates the popup notifications.
+-   [Tailwind CSS](https://tailwindcss.com/docs) builds on save and reduces into styles/index.css and PostCSS purges the unused css on build.
+-   [React-Hook-Form](https://react-hook-form.com/) handles form logic
+-   [SWR](https://swr.vercel.app/) handles fetching data and cache management on the client for snappy load times and optimistic ui updates.
 
-## Learn More
+### Other notes so I don't forget:
 
-To learn more about Next.js, take a look at the following resources:
+-   No verification email is actually sent, the verification link appears in the node console for you to click.
+-   To propogate a schema change to the db, run `npx prisma migrate dev --preview-feature` again.
+-   The .next folder will not clean itself if the Prisma VS Code extension is enabled which will cause issues. Delete .next folder manually if this is the case.
+-   Setup @ relative imports in the tsconfig.json folder
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### To-Do
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+-   Better utilize the user provider so that authenticated pages do not need to be SSR
+-   Add SEO package
+-   Figure out .env.example file instead of env.local
+-   A bunch of other stuff.
