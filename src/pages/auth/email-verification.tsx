@@ -1,7 +1,7 @@
-import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/client'
 import Link from 'next/link'
 import React from 'react'
+import { GetServerSideProps } from 'next'
+import { getSession } from 'next-auth/client'
 
 const VerifyEmail = () => {
     return (

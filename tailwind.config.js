@@ -7,7 +7,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                primary: '#eee',
+                primary: colors.blue[300],
                 success: colors.green[500],
                 warn: colors.yellow[500],
                 error: colors.red[500],

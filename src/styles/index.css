@@ -32,10 +32,6 @@
         @apply p-2 border rounded-sm min-w-20 box-border;
     }
 
-    input:not(:last-child) {
-        @apply mb-4;
-    }
-
     label {
         @apply font-semibold mb-1;
     }
@@ -48,6 +44,14 @@
 
     .btn-primary {
         @apply bg-primary;
+    }
+
+    #nprogress {
+        @apply pointer-events-none;
+    }
+
+    #nprogress .bar {
+        @apply h-1 w-full top-0 left-0 z-50 fixed bg-primary;
     }
 }
 

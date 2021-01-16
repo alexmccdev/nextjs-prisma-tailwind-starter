@@ -1,5 +1,6 @@
-import Layout from '@components/shared/Layout'
 import Header from '@components/shared/Header'
+import Layout from '@components/shared/Layout'
+import Progress from '@components/shared/Progress'
 import React from 'react'
 import axios from 'axios'
 import { AppProps } from 'next/app'
@@ -25,6 +26,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                 <Layout>
                     <Component {...pageProps} />
                 </Layout>
+                <Progress />
                 <ToastContainer
                     position="bottom-center"
                     autoClose={5000}

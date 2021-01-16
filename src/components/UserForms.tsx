@@ -2,7 +2,7 @@ import React from 'react'
 import { signIn } from 'next-auth/client'
 import { useForm } from 'react-hook-form'
 
-const LoginForm = () => {
+export const LoginForm = () => {
     const { register, handleSubmit, errors } = useForm()
 
     const onSubmit = async (loginData: { email: string }) => {
@@ -20,11 +20,11 @@ const LoginForm = () => {
                 className="w-full"
                 id="email"
                 name="email"
-                placeholder="chris.sharma@climbs.com"
+                placeholder="alexmcc.dev@gmail.com"
                 ref={register({ required: true })}
             />
-            {errors.email && <span className="text-error">Email is required</span>}
-            <div className="flex">
+            {errors.email && <p className="text-error">Email is required</p>}
+            <div className="flex mt-4">
                 <button className="btn" type="submit">
                     Login
                 </button>
@@ -32,5 +32,3 @@ const LoginForm = () => {
         </form>
     )
 }
-
-export default LoginForm

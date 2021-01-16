@@ -1,14 +1,19 @@
 import React from 'react'
 import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/client'
 import { User } from 'next-auth'
+import { getSession } from 'next-auth/client'
 
 interface HomePageProps {
     user: User
 }
 
 const HomePage: React.FC<HomePageProps> = (props) => {
-    return <>{JSON.stringify(props.user)}</>
+    return (
+        <>
+            <pre>Current User Session:</pre>
+            <pre>{JSON.stringify(props.user, null, 4)}</pre>
+        </>
+    )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

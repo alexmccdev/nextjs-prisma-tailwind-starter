@@ -1,15 +1,15 @@
 import Link from 'next/link'
 import React from 'react'
 import router from 'next/router'
-import { useUser } from '@contexts/UserContext'
 import { signOut } from 'next-auth/client'
+import { useUser } from '@contexts/UserContext'
 
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
-    const { user } = useUser()
+    const { user, loading } = useUser()
 
-    if (!user) {
+    if (!user || loading) {
         return (
             <header>
                 <SiteLogo />
