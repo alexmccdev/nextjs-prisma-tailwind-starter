@@ -49,10 +49,6 @@
     #nprogress {
         @apply pointer-events-none;
     }
-
-    #nprogress .bar {
-        @apply h-1 w-full top-0 left-0 z-50 fixed bg-primary;
-    }
 }
 
 @layer utilities {

@@ -2,7 +2,7 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-    purge: ['./src/**/*.html', './src/**/*.{js,jsx,ts,tsx}'],
+    purge: ['./public/**/*.html', './src/**/*.{js,jsx,ts,tsx}'],
     darkMode: 'class',
     theme: {
         extend: {

@@ -1,9 +1,7 @@
 import Adapters from 'next-auth/adapters'
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import prisma from '@utils/prisma'
 
 let emailProviderOptions = {
     server: {
@@ -19,7 +17,10 @@ let emailProviderOptions = {
 
 // Console log the email links if not in production
 if (process.env.NODE_ENV !== 'production') {
-    emailProviderOptions.sendVerificationRequest = ({ identifier: email, url }) => {
+    emailProviderOptions.sendVerificationRequest = ({
+        identifier: email,
+        url,
+    }) => {
         console.log('\x1b[32m%s\x1b[0m', `Magic Link for ${email}:`)
         console.log('\x1b[32m%s\x1b[0m', url)
     }
