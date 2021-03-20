@@ -36,6 +36,13 @@ const options = {
         verifyRequest: '/auth/email-verification', // Used for check email page
         // newUser: null, // If set, new users will be directed here on first sign in
     },
+    // Adds user id to user session
+    callbacks: {
+        async session(session, token) {
+            session.user.id = token.id
+            return session
+        },
+    },
     debug: process.env.NODE_ENV !== 'production',
     adapter: Adapters.Prisma.Adapter({
         prisma,

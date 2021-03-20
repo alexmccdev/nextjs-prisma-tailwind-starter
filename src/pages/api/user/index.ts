@@ -2,11 +2,11 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '@utils/prisma'
 import { getSession } from 'next-auth/client'
 
-export const GET = async (email: string) => {
+export const GET = async (id: string) => {
     try {
         return await prisma.user.findUnique({
             where: {
-                email,
+                id,
             },
         })
     } catch {
@@ -23,7 +23,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     switch (req.method) {
         case 'GET':
-            return res.json(await GET(session.user.email))
+            return res.json(await GET(session.user.id))
 
         default:
             res.status(405).end()
