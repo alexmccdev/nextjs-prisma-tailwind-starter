@@ -5,7 +5,7 @@ This is a Next.js application using Prisma for an ORM and Tailwind for a css fra
 ### To get this running on your machine:
 
 1. `npm i`
-2. Setup a mysql db and replace values in .env
+2. Setup a mysql db and replace values in .env.example and remove example from file name.
 3. `npx prisma migrate dev --preview-feature` to build db and generate client types.
 4. `npm run dev`
 5. `npx prisma studio` to see your db.
