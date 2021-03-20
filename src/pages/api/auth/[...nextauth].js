@@ -17,10 +17,7 @@ let emailProviderOptions = {
 
 // Console log the email links if not in production
 if (process.env.NODE_ENV !== 'production') {
-    emailProviderOptions.sendVerificationRequest = ({
-        identifier: email,
-        url,
-    }) => {
+    emailProviderOptions.sendVerificationRequest = ({ identifier: email, url }) => {
         console.log('\x1b[32m%s\x1b[0m', `Magic Link for ${email}:`)
         console.log('\x1b[32m%s\x1b[0m', url)
     }
@@ -40,6 +37,7 @@ const options = {
     callbacks: {
         async session(session, token) {
             session.user.id = token.id
+            session.user.role = token.role
             return session
         },
     },
