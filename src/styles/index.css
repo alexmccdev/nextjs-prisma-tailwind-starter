@@ -42,12 +42,20 @@
         @apply min-h-10 py-2 p-4 border border-black rounded-sm min-w-20;
     }
 
+    .btn:disabled {
+        @apply cursor-not-allowed;
+    }
+
     .btn-primary {
         @apply bg-primary;
     }
 
     #nprogress {
         @apply pointer-events-none;
+    }
+
+    #nprogress .bar {
+        @apply h-1 w-full top-0 left-0 z-50 fixed bg-primary;
     }
 }
 

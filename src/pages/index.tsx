@@ -3,11 +3,11 @@ import { GetServerSideProps } from 'next'
 import { User } from 'next-auth'
 import { getSession } from 'next-auth/client'
 
-interface HomePageProps {
+interface IHomePageProps {
     user: User
 }
 
-const HomePage: React.FC<HomePageProps> = (props) => {
+const HomePage: React.FC<IHomePageProps> = (props) => {
     return (
         <>
             <pre>Current User Session:</pre>

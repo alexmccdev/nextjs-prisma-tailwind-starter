@@ -4,9 +4,9 @@ import router from 'next/router'
 import { signOut } from 'next-auth/client'
 import { useUser } from '@contexts/UserContext'
 
-interface HeaderProps {}
+interface IHeaderProps {}
 
-const Header: React.FC<HeaderProps> = () => {
+const Header: React.FC<IHeaderProps> = () => {
     const { user, loading } = useUser()
 
     if (!user || loading) {
@@ -22,9 +22,15 @@ const Header: React.FC<HeaderProps> = () => {
             <SiteLogo />
             <div className="flex items-center">
                 {user ? (
-                    <button className="btn" onClick={() => signOut()}>
-                        Logout {user.email}
-                    </button>
+                    <>
+                        <Link href="/account">
+                            <button className="btn mr-2">Edit Account</button>
+                        </Link>
+
+                        <button className="btn bg-error text-white" onClick={() => signOut()}>
+                            Logout {user.email}
+                        </button>
+                    </>
                 ) : (
                     <button className="btn" onClick={() => router.push('/login')}>
                         Login
@@ -35,7 +41,9 @@ const Header: React.FC<HeaderProps> = () => {
     )
 }
 
-const SiteLogo: React.FC = () => {
+interface ISiteLogoProps {}
+
+const SiteLogo: React.FC<ISiteLogoProps> = () => {
     return (
         <Link href="/">
             <a className="flex h-full">

@@ -3,7 +3,9 @@ import React from 'react'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/client'
 
-const Login = () => {
+interface ILoginPageProps {}
+
+const LoginPage: React.FC<ILoginPageProps> = () => {
     return (
         <div>
             <LoginForm />
@@ -25,4 +27,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 }
 
-export default Login
+export default LoginPage

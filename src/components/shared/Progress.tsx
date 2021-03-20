@@ -2,11 +2,6 @@ import NProgress from 'nprogress'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-// Putting classes here because tailwind jit purges them otherwise
-NProgress.configure({
-    template: `<div role="bar" class='h-1 w-full top-0 left-0 z-50 fixed bg-primary'></div>`,
-})
-
 const Progress = () => {
     const router = useRouter()
 
