@@ -1,4 +1,4 @@
-import { AdministerNameForm } from '@components/UserForms'
+import { AdministerAvatarForm, AdministerNameForm } from '@components/UserForms'
 import React from 'react'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/client'
@@ -6,6 +6,7 @@ import { Prisma, User } from '@prisma/client'
 import useSWR, { trigger } from 'swr'
 import useToast from '@hooks/useToast'
 import axios from 'axios'
+import { GET as GetUser } from '@api/user'
 
 interface AccountPageProps {
     user: User
@@ -34,7 +35,12 @@ const AccountPage: React.FC<AccountPageProps> = (props) => {
 
     return (
         <div>
-            <AdministerNameForm name={props.user.name} updateName={handleUpdateUser} maxLength={32} />
+            <AdministerNameForm name={user.name} updateName={handleUpdateUser} maxLength={32} />
+            <AdministerAvatarForm
+                avatar={user.avatar}
+                updateAvatar={handleUpdateUser}
+                defaultAvatar={'/default_avatar.jpg'}
+            />
         </div>
     )
 }
@@ -50,7 +56,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     return {
         props: {
-            user: session.user,
+            user: JSON.parse(JSON.stringify(await GetUser(session.user.id))),
         },
     }
 }

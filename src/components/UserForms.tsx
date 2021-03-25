@@ -1,6 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { signIn } from 'next-auth/client'
 import { useForm } from 'react-hook-form'
+import useToast from '@hooks/useToast'
+import axios from 'axios'
+import Modal from '@components/shared/Modal'
+import ReactCrop from 'react-image-crop'
+import { useDropzone } from 'react-dropzone'
+import { useModal } from 'react-modal-hook'
+
+import 'react-image-crop/dist/ReactCrop.css'
 
 interface ILoginFormProps {}
 
@@ -69,7 +77,7 @@ export const AdministerNameForm: React.FC<IAdministerNameFormProps> = (props) =>
                 props.updateName(e)
             })}
         >
-            <div className="border rounded">
+            <div className="border rounded mb-6">
                 <div className="p-4 border-b flex flex-col">
                     <h2>Your Name</h2>
                     <p className="mb-4">Please enter your full name, or a display name you are comfortable with.</p>
@@ -81,7 +89,7 @@ export const AdministerNameForm: React.FC<IAdministerNameFormProps> = (props) =>
                         ref={register({ maxLength: props.maxLength })}
                     />
                 </div>
-                <div className="py-2 px-4 flex justify-between bg-gray-50">
+                <div className="py-2 px-4 flex justify-between bg-gray-50 min-h-16">
                     <p className="self-center">Please use 32 characters at maximum.</p>
                     <button className="btn self-center" disabled={!isDirty}>
                         Save
@@ -89,5 +97,184 @@ export const AdministerNameForm: React.FC<IAdministerNameFormProps> = (props) =>
                 </div>
             </div>
         </form>
+    )
+}
+
+interface IAdministerAvatarForm {
+    avatar: string
+    updateAvatar: ({ avatar: string }) => {}
+    defaultAvatar: string
+}
+
+export const AdministerAvatarForm: React.FC<IAdministerAvatarForm> = (props) => {
+    const [file, setFile] = useState(null)
+    const [showModal, hideModal] = useModal(
+        () => (
+            <AvatarCropperModal
+                file={file}
+                hideModal={() => {
+                    hideModal()
+                    setFile(null)
+                }}
+                updateAvatar={props.updateAvatar}
+            />
+        ),
+        [file]
+    )
+
+    const { getInputProps, open } = useDropzone({
+        accept: 'image/*',
+        multiple: false,
+        onDrop: (acceptedFiles: any[]) => {
+            setFile(
+                Object.assign(acceptedFiles[0], {
+                    preview: URL.createObjectURL(acceptedFiles[0]),
+                })
+            )
+        },
+    })
+
+    useEffect(() => {
+        !!file ? showModal() : hideModal()
+    }, [file])
+
+    return (
+        <div className="border rounded mb-6">
+            <div className="flex justify-between p-4">
+                <div>
+                    <h2>Your Avatar</h2>
+                    <p className="my-2">
+                        This is your avatar. <br /> Click on the avatar to upload a custom one from your files.
+                    </p>
+                </div>
+                <img
+                    role="button"
+                    className="self-center w-20 h-20 border rounded-full hover:opacity-70"
+                    src={props.avatar || props.defaultAvatar}
+                    onClick={open}
+                />
+                <input {...getInputProps()} />
+            </div>
+            <div className="py-2 px-4 flex justify-between bg-gray-50 min-h-16">
+                <p className="self-center">An avatar is optional but strongly recommended.</p>
+            </div>
+        </div>
+    )
+}
+
+interface IAvatarCropperModal {
+    file: any
+    hideModal: () => void
+    updateAvatar: ({ avatar: string }) => void
+}
+
+export const AvatarCropperModal: React.FC<IAvatarCropperModal> = (props) => {
+    const [isUploading, setIsUploading] = useState(false)
+    const { showError } = useToast()
+
+    const [upImg] = useState(props.file.preview)
+    const [crop, setCrop] = useState<ReactCrop.Crop>({ unit: 'px', width: 200, height: 200, aspect: 1 / 1 })
+    const [completedCrop, setCompletedCrop] = useState(null)
+
+    const imgRef = useRef(null)
+    const previewCanvasRef = useRef<HTMLCanvasElement>(null)
+
+    const onLoad = useCallback((img) => {
+        imgRef.current = img
+    }, [])
+
+    useEffect(() => {
+        if (!completedCrop || !previewCanvasRef.current || !imgRef.current) {
+            return
+        }
+
+        const image = imgRef.current
+        const canvas = previewCanvasRef.current
+        const crop = completedCrop
+
+        const scaleX = image.naturalWidth / image.width
+        const scaleY = image.naturalHeight / image.height
+        const ctx = canvas.getContext('2d')
+        const pixelRatio = window.devicePixelRatio
+
+        canvas.width = crop.width * pixelRatio
+        canvas.height = crop.height * pixelRatio
+
+        ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
+        ctx.imageSmoothingQuality = 'high'
+
+        ctx.drawImage(
+            image,
+            crop.x * scaleX,
+            crop.y * scaleY,
+            crop.width * scaleX,
+            crop.height * scaleY,
+            0,
+            0,
+            crop.width,
+            crop.height
+        )
+    }, [completedCrop])
+
+    useEffect(() => {
+        return () => {
+            upImg && URL.revokeObjectURL(upImg)
+        }
+    }, [upImg])
+
+    const uploadPhoto = async () => {
+        if (!crop || !previewCanvasRef.current) {
+            return
+        }
+
+        const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`
+        setIsUploading(true)
+
+        const {
+            data: { signature, timestamp, eager },
+        } = await axios.post('/api/image/sign', { eager: 'w_250,h_250' })
+
+        const formData = new FormData()
+
+        const blob = await new Promise((resolve) => previewCanvasRef.current.toBlob(resolve))
+        formData.append('file', new File([blob as Blob], 'avatar'))
+        formData.append('signature', signature)
+        formData.append('timestamp', timestamp)
+        formData.append('eager', eager)
+        formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_PUBLIC_KEY)
+
+        try {
+            const { data } = await axios.post(url, formData)
+            setIsUploading(false)
+            props.updateAvatar({ avatar: data.eager[0].secure_url })
+        } catch {
+            setIsUploading(false)
+            showError('Oops! Something went wrong during upload')
+        }
+
+        props.hideModal()
+    }
+
+    return (
+        <Modal hide={props.hideModal}>
+            <div className="flex justify-center">
+                <ReactCrop
+                    src={upImg}
+                    onImageLoaded={onLoad}
+                    crop={crop}
+                    onChange={(c) => setCrop(c)}
+                    onComplete={(c) => setCompletedCrop(c)}
+                />
+                <canvas ref={previewCanvasRef} className="hidden" />
+            </div>
+            <div className="flex justify-center mt-4">
+                <button className="mr-2 btn" onClick={uploadPhoto} disabled={isUploading}>
+                    Save
+                </button>
+                <button className="ml-2 btn" onClick={props.hideModal} disabled={isUploading}>
+                    Cancel
+                </button>
+            </div>
+        </Modal>
     )
 }

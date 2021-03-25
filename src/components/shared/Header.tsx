@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import router from 'next/router'
-import { signOut } from 'next-auth/client'
+import { Avatar } from './Avatar'
 import { useUser } from '@contexts/UserContext'
 
 interface IHeaderProps {}
@@ -22,15 +22,11 @@ const Header: React.FC<IHeaderProps> = () => {
             <SiteLogo />
             <div className="flex items-center">
                 {user ? (
-                    <>
-                        <Link href="/account">
-                            <button className="btn mr-2">Edit Account</button>
-                        </Link>
-
-                        <button className="btn bg-error text-white" onClick={() => signOut()}>
-                            Logout {user.email}
-                        </button>
-                    </>
+                    <Link href="/account">
+                        <a>
+                            <Avatar src={user.avatar as string} alt={user.name} />
+                        </a>
+                    </Link>
                 ) : (
                     <button className="btn" onClick={() => router.push('/login')}>
                         Login

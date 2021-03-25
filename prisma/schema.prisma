@@ -34,6 +34,7 @@ model User {
   id            String    @default(cuid()) @id 
   name          String?
   email         String?   @unique
+  avatar        String?
   emailVerified DateTime? @map(name: "email_verified")
   role          Role      @default(USER)
   createdAt     DateTime  @default(now()) @map(name: "created_at")

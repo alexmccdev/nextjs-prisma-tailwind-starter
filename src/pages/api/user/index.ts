@@ -1,15 +1,24 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '@utils/prisma'
 import { getSession } from 'next-auth/client'
-import { Prisma } from '@prisma/client'
+import { Prisma, Role, User } from '@prisma/client'
+
+type SafeUser = {
+    name: string | null
+    email: string
+    avatar: string | null
+    role: Role
+}
 
 export const GET = async (id: string) => {
     try {
-        return await prisma.user.findUnique({
-            where: {
-                id,
-            },
-        })
+        return getSafeUser(
+            await prisma.user.findUnique({
+                where: {
+                    id,
+                },
+            })
+        )
     } catch {
         return { error: 'Could not find user.' }
     }
@@ -17,15 +26,26 @@ export const GET = async (id: string) => {
 
 export const PATCH = async (id: string, data: Prisma.UserUpdateInput) => {
     try {
-        return await prisma.user.update({
-            where: {
-                id,
-            },
-            data,
-        })
+        return getSafeUser(
+            await prisma.user.update({
+                where: {
+                    id,
+                },
+                data,
+            })
+        )
     } catch {
         return { error: 'Something went wrong.' }
     }
+}
+
+const getSafeUser = (user: User) => {
+    return {
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+        role: user.role,
+    } as SafeUser
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
