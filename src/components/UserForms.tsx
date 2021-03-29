@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { signIn } from 'next-auth/client'
+import { signIn, signOut } from 'next-auth/client'
 import { useForm } from 'react-hook-form'
 import useToast from '@hooks/useToast'
 import axios from 'axios'
@@ -43,6 +43,24 @@ export const LoginForm: React.FC<ILoginFormProps> = () => {
     )
 }
 
+interface ILogoutFormProps {}
+
+export const LogoutForm: React.FC<ILogoutFormProps> = (props) => {
+    return (
+        <div className="border rounded mb-6">
+            <div className="p-4 border-b flex flex-col">
+                <h2>Logout</h2>
+                <p className="my-2">Logout of this device.</p>
+            </div>
+            <div className="py-2 px-4 flex justify-end bg-gray-50 min-h-16">
+                <button className="btn self-center bg-error text-white" onClick={() => signOut()}>
+                    Logout
+                </button>
+            </div>
+        </div>
+    )
+}
+
 interface IAdministerNameFormProps {
     name: string
     maxLength: number
@@ -80,7 +98,7 @@ export const AdministerNameForm: React.FC<IAdministerNameFormProps> = (props) =>
             <div className="border rounded mb-6">
                 <div className="p-4 border-b flex flex-col">
                     <h2>Your Name</h2>
-                    <p className="mb-4">Please enter your full name, or a display name you are comfortable with.</p>
+                    <p className="my-2">Please enter your full name, or a display name you are comfortable with.</p>
                     <input
                         type="text"
                         className="max-w-xs"
@@ -140,7 +158,7 @@ export const AdministerAvatarForm: React.FC<IAdministerAvatarForm> = (props) => 
 
     return (
         <div className="border rounded mb-6">
-            <div className="flex justify-between p-4">
+            <div className="flex justify-between p-4 border-b">
                 <div>
                     <h2>Your Avatar</h2>
                     <p className="my-2">
