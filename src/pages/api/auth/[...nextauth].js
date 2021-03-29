@@ -33,11 +33,9 @@ const options = {
         verifyRequest: '/auth/email-verification', // Used for check email page
         // newUser: null, // If set, new users will be directed here on first sign in
     },
-    // Adds user id to user session
     callbacks: {
         async session(session, token) {
-            session.user.id = token.id
-            session.user.role = token.role
+            session.user = { id: token.id, role: token.role }
             return session
         },
     },

@@ -1,7 +1,7 @@
 import 'next-auth'
 
 declare module 'next-auth' {
-    interface User {
+    interface UserSession {
         id: string
         role: string
     }

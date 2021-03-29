@@ -7,7 +7,6 @@ import { AppProps } from 'next/app'
 import { SWRConfig } from 'swr'
 import { ToastContainer } from 'react-toastify'
 import { ModalProvider } from 'react-modal-hook'
-import { UserProvider } from '@contexts/UserContext'
 
 import 'react-toastify/dist/ReactToastify.css'
 import '../styles/index.css' // Import this last
@@ -22,26 +21,24 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                 },
             }}
         >
-            <UserProvider>
-                <ModalProvider>
-                    <TopProgress />
-                    <Header />
-                    <Layout>
-                        <Component {...pageProps} />
-                    </Layout>
-                    <ToastContainer
-                        position="bottom-center"
-                        autoClose={5000}
-                        hideProgressBar={true}
-                        newestOnTop={false}
-                        closeOnClick={false}
-                        rtl={false}
-                        pauseOnFocusLoss={false}
-                        draggable={true}
-                        pauseOnHover={false}
-                    />
-                </ModalProvider>
-            </UserProvider>
+            <ModalProvider>
+                <TopProgress />
+                <Header />
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
+                <ToastContainer
+                    position="bottom-center"
+                    autoClose={5000}
+                    hideProgressBar={true}
+                    newestOnTop={false}
+                    closeOnClick={false}
+                    rtl={false}
+                    pauseOnFocusLoss={false}
+                    draggable={true}
+                    pauseOnHover={false}
+                />
+            </ModalProvider>
         </SWRConfig>
     )
 }

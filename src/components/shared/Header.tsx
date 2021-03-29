@@ -1,15 +1,15 @@
 import Link from 'next/link'
 import React from 'react'
 import router from 'next/router'
-import { Avatar } from './Avatar'
-import { useUser } from '@contexts/UserContext'
+import { Avatar } from '@components/shared/Avatar'
+import useUser from '@hooks/useUser'
 
 interface IHeaderProps {}
 
 const Header: React.FC<IHeaderProps> = () => {
     const { user, loading } = useUser()
 
-    if (!user || loading) {
+    if (loading) {
         return (
             <header>
                 <SiteLogo />

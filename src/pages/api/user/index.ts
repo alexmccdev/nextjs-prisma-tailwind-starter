@@ -57,9 +57,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     switch (req.method) {
         case 'GET':
-            return res.json(await GET(session.user.id))
+            return res.json(await GET(session.user.id as string))
         case 'PATCH':
-            return res.json(await PATCH(session.user.id, req.body))
+            return res.json(await PATCH(session.user.id as string, req.body))
         default:
             res.status(405).end()
             break

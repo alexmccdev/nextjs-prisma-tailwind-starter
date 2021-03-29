@@ -1,4 +1,4 @@
-import { AdministerAvatarForm, AdministerNameForm } from '@components/UserForms'
+import { AdministerAvatarForm, AdministerNameForm, LogoutForm } from '@components/UserForms'
 import React from 'react'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/client'
@@ -41,6 +41,7 @@ const AccountPage: React.FC<AccountPageProps> = (props) => {
                 updateAvatar={handleUpdateUser}
                 defaultAvatar={'/default_avatar.jpg'}
             />
+            <LogoutForm />
         </div>
     )
 }
