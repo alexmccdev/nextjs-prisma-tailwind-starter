@@ -1,5 +1,5 @@
 module.exports = {
     images: {
-        domains: ['res.cloudinary.com'],
+        domains: ['nextjs-prisma-tailwind-starter.s3.amazonaws.com'],
     },
 }

@@ -1,19 +1,34 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/client'
-import { v2 as cloudinary } from 'cloudinary'
+import AWS from 'aws-sdk'
+import cuid from 'cuid'
 
-const POST = (eager: string) => {
-    const timestamp = Math.round(new Date().getTime() / 1000)
+const bucketName = process.env.AWS_BUCKET_NAME
+const region = process.env.AWS_BUCKET_REGION
+const accessKeyId = process.env.AWS_ACCESS_KEY
+const secretAccessKey = process.env.AWS_SECRET_KEY
 
-    const signature = cloudinary.utils.api_sign_request(
-        {
-            timestamp,
-            eager,
-        },
-        process.env.CLOUDINARY_SECRET
-    )
+const s3 = new AWS.S3({
+    signatureVersion: 'v4',
+    region,
+    accessKeyId,
+    secretAccessKey,
+})
 
-    return { signature, timestamp, eager }
+const params = {
+    Bucket: bucketName,
+    Key: cuid() + '.png',
+    Expires: 30, // expiry time
+    ContentType: 'image/*', // this can be changed as per the file type
+    ACL: 'public-read',
+}
+
+const GET = async () => {
+    const signedRequestUrl = await s3.getSignedUrlPromise('putObject', params)
+    return {
+        signedRequestUrl,
+        url: `https://${bucketName}.s3.amazonaws.com/${params.Key}`,
+    }
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -24,8 +39,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     switch (req.method) {
-        case 'POST':
-            return res.json(POST(req.body.eager))
+        case 'GET':
+            return res.json(await GET())
 
         default:
             res.status(405).end()

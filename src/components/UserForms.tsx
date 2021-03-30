@@ -245,26 +245,18 @@ export const AvatarCropperModal: React.FC<IAvatarCropperModal> = (props) => {
             return
         }
 
-        const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`
+        const {
+            data: { signedRequestUrl, url },
+        } = await axios.get('/api/image/sign')
         setIsUploading(true)
 
-        const {
-            data: { signature, timestamp, eager },
-        } = await axios.post('/api/image/sign', { eager: 'w_250,h_250' })
-
-        const formData = new FormData()
-
         const blob = await new Promise((resolve) => previewCanvasRef.current.toBlob(resolve))
-        formData.append('file', new File([blob as Blob], 'avatar'))
-        formData.append('signature', signature)
-        formData.append('timestamp', timestamp)
-        formData.append('eager', eager)
-        formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_PUBLIC_KEY)
 
         try {
-            const { data } = await axios.post(url, formData)
+            await axios.put(signedRequestUrl, new File([blob as Blob], 'avatar'))
+
             setIsUploading(false)
-            props.updateAvatar({ avatar: data.eager[0].secure_url })
+            props.updateAvatar({ avatar: url })
         } catch {
             setIsUploading(false)
             showError('Oops! Something went wrong during upload')
@@ -282,6 +274,8 @@ export const AvatarCropperModal: React.FC<IAvatarCropperModal> = (props) => {
                     crop={crop}
                     onChange={(c) => setCrop(c)}
                     onComplete={(c) => setCompletedCrop(c)}
+                    minHeight={100}
+                    minWidth={100}
                 />
                 <canvas ref={previewCanvasRef} className="hidden" />
             </div>
