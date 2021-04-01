@@ -9,3 +9,4 @@
 -   [ ] Get actual emails sending through SES
 -   [ ] Public user profile page i.e. /user/:id
 -   [ ] Better server side logging
+-   [ ] API Testing
