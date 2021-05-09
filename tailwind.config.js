@@ -1,11 +1,15 @@
-// tailwind.config.js
 const colors = require('tailwindcss/colors')
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
     purge: ['./public/**/*.html', './src/**/*.{js,jsx,ts,tsx}'],
     darkMode: 'class',
     theme: {
         extend: {
+            fontFamily: {
+                sans: defaultTheme.fontFamily.sans,
+                serif: defaultTheme.fontFamily.serif,
+            },
             colors: {
                 primary: colors.blue[300],
                 success: colors.green[500],

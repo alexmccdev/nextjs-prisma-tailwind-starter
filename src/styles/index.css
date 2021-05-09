@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+    :root {
+        --color-primary: theme('colors.primary');
+        --color-success: theme('colors.success');
+        --color-warn: theme('colors.warn');
+        --color-error: theme('colors.error');
+    }
+
     html,
     body,
     div#__next {

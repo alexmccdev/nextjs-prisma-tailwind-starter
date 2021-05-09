@@ -40,11 +40,12 @@ const Header: React.FC<IHeaderProps> = () => {
 interface ISiteLogoProps {}
 
 const SiteLogo: React.FC<ISiteLogoProps> = () => {
+    const siteName = process.env.NEXT_PUBLIC_SITE_NAME
     return (
         <Link href="/">
             <a className="flex h-full">
-                <h1 className="self-center" title={'Next.js Prisma Tailwind Starter'}>
-                    Next.js Prisma Tailwind Starter
+                <h1 className="self-center" title={siteName}>
+                    {siteName}
                 </h1>
             </a>
         </Link>
