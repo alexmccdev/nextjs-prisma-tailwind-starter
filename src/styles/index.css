@@ -10,11 +10,6 @@
         --color-error: theme('colors.error');
     }
 
-    html,
-    body,
-    div#__next {
-        @apply h-full flex flex-col;
-    }
     header {
         @apply h-20 flex flex-none justify-between px-4 border-b items-center;
     }
@@ -56,15 +51,37 @@
     .btn-primary {
         @apply bg-primary;
     }
-
-    #nprogress {
-        @apply pointer-events-none;
-    }
-
-    #nprogress .bar {
-        @apply h-1 w-full top-0 left-0 z-50 fixed bg-primary;
-    }
 }
 
 @layer utilities {
+}
+
+div#__next {
+    grid-template: auto 1fr auto / 1fr;
+    grid-template-areas:
+        'header header'
+        'main main'
+        'footer footer';
+    @apply grid w-screen h-screen;
+}
+
+header {
+    grid-area: header;
+}
+
+main {
+    grid-area: main;
+    @apply w-full mx-auto max-w-3xl p-4 flex flex-col flex-grow;
+}
+
+footer {
+    grid-area: footer;
+}
+
+#nprogress {
+    @apply pointer-events-none;
+}
+
+#nprogress .bar {
+    @apply h-1 w-full top-0 left-0 z-50 fixed bg-primary;
 }

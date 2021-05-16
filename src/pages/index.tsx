@@ -2,6 +2,7 @@ import React from 'react'
 import { GetServerSideProps } from 'next'
 import { UserSession } from 'next-auth'
 import { getSession } from 'next-auth/client'
+import Layout from '@components/shared/Layout'
 
 interface IHomePageProps {
     user: UserSession
@@ -9,10 +10,10 @@ interface IHomePageProps {
 
 const HomePage: React.FC<IHomePageProps> = (props) => {
     return (
-        <>
+        <Layout>
             <pre>Current User Session:</pre>
             <pre>{JSON.stringify(props.user, null, 4)}</pre>
-        </>
+        </Layout>
     )
 }
 

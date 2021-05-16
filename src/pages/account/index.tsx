@@ -7,6 +7,7 @@ import useSWR, { trigger } from 'swr'
 import useToast from '@hooks/useToast'
 import axios from 'axios'
 import { GET as GetUser } from '@api/user'
+import Layout from '@components/shared/Layout'
 
 interface AccountPageProps {
     user: User
@@ -34,7 +35,7 @@ const AccountPage: React.FC<AccountPageProps> = (props) => {
     }
 
     return (
-        <div>
+        <Layout title="Account">
             <AdministerNameForm name={user.name} updateName={handleUpdateUser} maxLength={32} />
             <AdministerAvatarForm
                 avatar={user.avatar}
@@ -42,7 +43,7 @@ const AccountPage: React.FC<AccountPageProps> = (props) => {
                 defaultAvatar={'/default_avatar.jpg'}
             />
             <LogoutForm />
-        </div>
+        </Layout>
     )
 }
 

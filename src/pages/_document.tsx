@@ -16,7 +16,10 @@ class MyDocument extends Document {
 
         return (
             <Html lang="en">
-                <Head />
+                <Head>
+                    <meta charSet="UTF-8" />
+                    <meta name="description" content={`${process.env.NEXT_PUBLIC_SITE_NAME}`} />
+                </Head>
                 <body>
                     <script dangerouslySetInnerHTML={{ __html: setInitialTheme }} />
                     <Main />
