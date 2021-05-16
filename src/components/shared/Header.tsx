@@ -1,8 +1,8 @@
-import Link from 'next/link'
-import React from 'react'
-import router from 'next/router'
 import { Avatar } from '@components/shared/Avatar'
 import useUser from '@hooks/useUser'
+import Link from 'next/link'
+import router from 'next/router'
+import React from 'react'
 
 interface IHeaderProps {}
 

@@ -1,11 +1,11 @@
-import React from 'react'
-import { GetServerSideProps } from 'next'
-import { UserSession } from 'next-auth'
-import { getSession } from 'next-auth/client'
 import Layout from '@components/shared/Layout'
+import { GetServerSideProps } from 'next'
+import { UserSessionData } from 'next-auth'
+import { getSession } from 'next-auth/client'
+import React from 'react'
 
 interface IHomePageProps {
-    user: UserSession
+    user: UserSessionData
 }
 
 const HomePage: React.FC<IHomePageProps> = (props) => {

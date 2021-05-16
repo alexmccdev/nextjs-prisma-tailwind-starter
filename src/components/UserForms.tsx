@@ -1,14 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { signIn, signOut } from 'next-auth/client'
-import { useForm } from 'react-hook-form'
+import Modal from '@components/shared/Modal'
 import useToast from '@hooks/useToast'
 import axios from 'axios'
-import Modal from '@components/shared/Modal'
-import ReactCrop from 'react-image-crop'
+import { signIn, signOut } from 'next-auth/client'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { useModal } from 'react-modal-hook'
-
+import { useForm } from 'react-hook-form'
+import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
+import { useModal } from 'react-modal-hook'
 
 interface ILoginFormProps {}
 

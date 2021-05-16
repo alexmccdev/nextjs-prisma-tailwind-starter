@@ -9,6 +9,9 @@
         "files.exclude": {
             "node_modules/": true,
             ".next/": true
+        },
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
         }
     }
 }

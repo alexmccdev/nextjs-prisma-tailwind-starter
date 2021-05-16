@@ -1,11 +1,9 @@
-import React from 'react'
 import axios from 'axios'
 import { AppProps } from 'next/app'
-import { SWRConfig } from 'swr'
-
+import React from 'react'
 import { ModalProvider } from 'react-modal-hook'
-
 import 'react-toastify/dist/ReactToastify.css'
+import { SWRConfig } from 'swr'
 import '../styles/index.css' // Import this last
 
 const MyApp = ({ Component, pageProps }: AppProps) => {

@@ -1,13 +1,13 @@
-import { AdministerAvatarForm, AdministerNameForm, LogoutForm } from '@components/UserForms'
-import React from 'react'
-import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/client'
-import { Prisma, User } from '@prisma/client'
-import useSWR, { trigger } from 'swr'
-import useToast from '@hooks/useToast'
-import axios from 'axios'
 import { GET as GetUser } from '@api/user'
 import Layout from '@components/shared/Layout'
+import { AdministerAvatarForm, AdministerNameForm, LogoutForm } from '@components/UserForms'
+import useToast from '@hooks/useToast'
+import { Prisma, User } from '@prisma/client'
+import axios from 'axios'
+import { GetServerSideProps } from 'next'
+import { getSession } from 'next-auth/client'
+import React from 'react'
+import useSWR, { trigger } from 'swr'
 
 interface AccountPageProps {
     user: User

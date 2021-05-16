@@ -1,15 +1,16 @@
-import Link from 'next/link'
-import React from 'react'
+import Layout from '@components/shared/Layout'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/client'
+import Link from 'next/link'
+import React from 'react'
 
 const VerifyEmail = () => {
     return (
-        <>
+        <Layout title="Verify">
             <h2 className="mb-4">Check Email</h2>
             <p>Please check your email inbox and click on the provided link to verify your account.</p>
             <Link href="/login">Back to Login</Link>
-        </>
+        </Layout>
     )
 }
 

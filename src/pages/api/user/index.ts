@@ -1,7 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '@utils/prisma'
-import { getSession } from 'next-auth/client'
 import { Prisma, Role, User } from '@prisma/client'
+import prisma from '@utils/prisma'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { getSession } from 'next-auth/client'
 
 type SafeUser = {
     name: string | null

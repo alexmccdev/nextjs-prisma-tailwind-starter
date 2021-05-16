@@ -1,8 +1,8 @@
+import Header from '@components/shared/Header'
+import TopProgress from '@components/shared/Progress'
 import Head from 'next/head'
 import React from 'react'
-import Header from '@components/shared/Header'
 import { ToastContainer } from 'react-toastify'
-import TopProgress from '@components/shared/Progress'
 
 interface ILayoutProps {
     title?: string

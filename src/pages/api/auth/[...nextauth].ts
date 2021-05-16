@@ -1,7 +1,9 @@
-import Adapters from 'next-auth/adapters'
-import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
+import { User } from '@prisma/client'
 import prisma from '@utils/prisma'
+import NextAuth, { Session } from 'next-auth'
+import Adapters from 'next-auth/adapters'
+import { NextApiRequest, NextApiResponse } from 'next-auth/internals/utils'
+import Providers from 'next-auth/providers'
 
 let emailProviderOptions = {
     server: {
@@ -13,6 +15,7 @@ let emailProviderOptions = {
         },
     },
     from: process.env.EMAIL_FROM,
+    sendVerificationRequest: null,
 }
 
 // Console log the email links if not in production
@@ -34,15 +37,15 @@ const options = {
         // newUser: null, // If set, new users will be directed here on first sign in
     },
     callbacks: {
-        async session(session, token) {
-            session.user = { id: token.id, role: token.role }
+        async session(session: Session, token: User) {
+            session.user = { id: token.id }
             return session
         },
     },
-    debug: process.env.NODE_ENV !== 'production',
+    debug: process.env.NODE_ENV !== 'production' && process.env.DEBUG === 'true',
     adapter: Adapters.Prisma.Adapter({
         prisma,
     }),
 }
 
-export default (req, res) => NextAuth(req, res, options)
+export default (req: NextApiRequest, res: NextApiResponse<any>) => NextAuth(req, res, options)

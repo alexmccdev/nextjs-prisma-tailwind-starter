@@ -1,7 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { getSession } from 'next-auth/client'
 import AWS from 'aws-sdk'
 import cuid from 'cuid'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { getSession } from 'next-auth/client'
 
 const bucketName = process.env.AWS_BUCKET_NAME
 const region = process.env.AWS_BUCKET_REGION

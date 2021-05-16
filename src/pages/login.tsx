@@ -1,8 +1,8 @@
+import Layout from '@components/shared/Layout'
 import { LoginForm } from '@components/UserForms'
-import React from 'react'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/client'
-import Layout from '@components/shared/Layout'
+import React from 'react'
 
 interface ILoginPageProps {}
 

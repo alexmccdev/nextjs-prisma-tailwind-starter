@@ -1,9 +1,13 @@
 import 'next-auth'
 
 declare module 'next-auth' {
-    interface UserSession {
+    interface Session extends Record<string, unknown> {
+        user?: UserSessionData
+        expires?: string
+    }
+
+    interface UserSessionData {
         id: string
-        role: string
     }
 }
 
