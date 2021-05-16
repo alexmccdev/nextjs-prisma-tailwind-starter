@@ -2,58 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-    :root {
-        --color-primary: theme('colors.primary');
-        --color-success: theme('colors.success');
-        --color-warn: theme('colors.warn');
-        --color-error: theme('colors.error');
-    }
-
-    header {
-        @apply h-20 flex flex-none justify-between px-4 border-b items-center;
-    }
-
-    h1 {
-        @apply font-bold text-3xl;
-    }
-
-    h2 {
-        @apply font-bold text-xl;
-    }
-
-    h3 {
-        @apply font-bold text-base;
-    }
-
-    input[type='text'],
-    input[type='email'],
-    input[type='password'],
-    textarea,
-    select {
-        @apply p-2 border rounded-sm min-w-20 box-border;
-    }
-
-    label {
-        @apply font-semibold mb-1;
-    }
+:root {
+    --color-primary: theme('colors.primary');
+    --color-secondary: theme('colors.secondary');
+    --color-success: theme('colors.success');
+    --color-warn: theme('colors.warn');
+    --color-error: theme('colors.error');
 }
 
-@layer components {
-    .btn {
-        @apply min-h-10 py-2 p-4 border border-black rounded-sm min-w-20;
-    }
-
-    .btn:disabled {
-        @apply cursor-not-allowed;
-    }
-
-    .btn-primary {
-        @apply bg-primary;
-    }
+header {
+    @apply h-20 flex flex-none justify-between px-4 border-b items-center;
 }
 
-@layer utilities {
+h1 {
+    @apply font-bold text-3xl;
+}
+
+h2 {
+    @apply font-bold text-xl;
+}
+
+h3 {
+    @apply font-bold text-base;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+textarea,
+select {
+    @apply p-2 border rounded-sm min-w-20 box-border disabled:cursor-not-allowed disabled:bg-gray-50;
+}
+
+label {
+    @apply font-semibold mb-1;
+}
+
+.btn {
+    @apply py-2 p-4 min-w-20 rounded-sm hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-70;
+}
+
+.btn-primary {
+    @apply bg-primary text-white;
+}
+
+.btn-secondary {
+    @apply bg-secondary text-white;
+}
+
+.btn-success {
+    @apply bg-success text-white;
+}
+
+.btn-error {
+    @apply bg-error text-white;
+}
+
+.card {
+    @apply border rounded-sm p-4;
 }
 
 div#__next {
@@ -62,7 +68,7 @@ div#__next {
         'header header'
         'main main'
         'footer footer';
-    @apply grid w-screen h-screen;
+    @apply grid w-screen h-screen overflow-x-auto;
 }
 
 header {

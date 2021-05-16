@@ -34,7 +34,7 @@ export const LoginForm: React.FC<ILoginFormProps> = () => {
             />
             {errors.email && <p className="text-error">Email is required</p>}
             <div className="flex mt-4">
-                <button className="btn" type="submit">
+                <button className="btn btn-primary" type="submit">
                     Login
                 </button>
             </div>
@@ -52,7 +52,7 @@ export const LogoutForm: React.FC<ILogoutFormProps> = (props) => {
                 <p className="my-2">Logout of this device.</p>
             </div>
             <div className="py-2 px-4 flex justify-end bg-gray-50 min-h-16">
-                <button className="btn self-center bg-error text-white" onClick={() => signOut()}>
+                <button className="btn btn-error self-center" onClick={() => signOut()}>
                     Logout
                 </button>
             </div>
@@ -108,7 +108,7 @@ export const AdministerNameForm: React.FC<IAdministerNameFormProps> = (props) =>
                 </div>
                 <div className="py-2 px-4 flex justify-between bg-gray-50 min-h-16">
                     <p className="self-center">Please use 32 characters at maximum.</p>
-                    <button className="btn self-center" disabled={!isDirty}>
+                    <button className="btn btn-success self-center" disabled={!isDirty}>
                         Save
                     </button>
                 </div>
