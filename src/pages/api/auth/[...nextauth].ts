@@ -42,7 +42,7 @@ const options = {
             return session
         },
     },
-    debug: process.env.NODE_ENV !== 'production' && process.env.DEBUG === 'true',
+    debug: process.env.NODE_ENV !== 'production' && process.env.NEXTAUTH_LOG === 'true',
     adapter: Adapters.Prisma.Adapter({
         prisma,
     }),
