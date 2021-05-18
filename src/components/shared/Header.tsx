@@ -28,7 +28,7 @@ const Header: React.FC<IHeaderProps> = () => {
                         </a>
                     </Link>
                 ) : (
-                    <button className="btn" onClick={() => router.push('/login')}>
+                    <button className="btn btn-primary" onClick={() => router.push('/login')}>
                         Login
                     </button>
                 )}

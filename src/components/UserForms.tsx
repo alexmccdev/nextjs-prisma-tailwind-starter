@@ -12,12 +12,17 @@ import { useModal } from 'react-modal-hook'
 interface ILoginFormProps {}
 
 export const LoginForm: React.FC<ILoginFormProps> = () => {
-    const { register, handleSubmit, errors } = useForm()
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isDirty, isValid },
+    } = useForm({ mode: 'onChange' })
 
     const onSubmit = async (loginData: { email: string }) => {
         await signIn('email', { ...loginData, callbackUrl: '/' })
     }
 
+    console.log(isDirty, isValid, errors)
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <h2 className="mb-4">Login</h2>
@@ -25,16 +30,15 @@ export const LoginForm: React.FC<ILoginFormProps> = () => {
                 Enter your email address to sign in or create an account
             </label>
             <input
-                type="text"
+                type="email"
                 className="w-full"
                 id="email"
-                name="email"
                 placeholder="alexmcc.dev@gmail.com"
-                ref={register({ required: true })}
+                {...register('email', { required: true })}
             />
             {errors.email && <p className="text-error">Email is required</p>}
             <div className="flex mt-4">
-                <button className="btn btn-primary" type="submit">
+                <button className="btn btn-primary" type="submit" disabled={!isDirty || !isValid}>
                     Login
                 </button>
             </div>
@@ -101,9 +105,8 @@ export const AdministerNameForm: React.FC<IAdministerNameFormProps> = (props) =>
                     <input
                         type="text"
                         className="max-w-xs"
-                        name="name"
                         maxLength={props.maxLength}
-                        ref={register({ maxLength: props.maxLength })}
+                        {...register('name', { maxLength: props.maxLength })}
                     />
                 </div>
                 <div className="py-2 px-4 flex justify-between bg-gray-50 min-h-16">

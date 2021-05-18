@@ -61,8 +61,14 @@ const DesignPage: React.FC<IDesignPageProps> = (props) => {
                     placeholder="textarea input"
                 />
                 <label htmlFor="select">Select</label>
-                <select disabled={disabled} className="mb-2" id="select" placeholder="select input">
-                    <option disabled selected>
+                <select
+                    defaultValue="default"
+                    disabled={disabled}
+                    className="mb-2"
+                    id="select"
+                    placeholder="select input"
+                >
+                    <option value="default" disabled>
                         Select your option
                     </option>
                     <option>Durr</option>
