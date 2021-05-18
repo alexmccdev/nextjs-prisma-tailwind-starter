@@ -12,6 +12,14 @@
         },
         "editor.codeActionsOnSave": {
             "source.organizeImports": true
-        }
+        },
+        "css.validate": false,
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "tailwindCSS.includeLanguages": {
+            "plaintext": "html"
+        },
+        "tailwindCSS.validate": true
     }
 }
