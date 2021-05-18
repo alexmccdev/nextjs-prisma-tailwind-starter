@@ -5,7 +5,6 @@
         }
     ],
     "settings": {
-        "css.lint.unknownAtRules": "ignore",
         "files.exclude": {
             "node_modules/": true,
             ".next/": true
@@ -20,6 +19,8 @@
         "tailwindCSS.includeLanguages": {
             "plaintext": "html"
         },
-        "tailwindCSS.validate": true
+        "tailwindCSS.validate": true,
+        "headwind.runOnSave": true,
+        "headwind.removeDuplicates": true
     }
 }

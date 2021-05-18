@@ -7,7 +7,7 @@ interface IAvatarProps {
 
 export const Avatar: React.FC<IAvatarProps> = (props) => {
     return (
-        <div role="button" className="w-10 h-10 rounded-full overflow-hidden">
+        <div role="button" className="w-10 h-10 overflow-hidden rounded-full">
             <img src={props.src} alt={props.alt || 'Your avatar'} />
         </div>
     )

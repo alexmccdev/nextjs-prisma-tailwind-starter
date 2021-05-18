@@ -11,19 +11,19 @@
 }
 
 header {
-    @apply h-20 flex flex-none justify-between px-4 border-b items-center;
+    @apply flex items-center justify-between flex-none h-20 px-4 border-b;
 }
 
 h1 {
-    @apply font-bold text-3xl;
+    @apply text-3xl font-bold;
 }
 
 h2 {
-    @apply font-bold text-xl;
+    @apply text-xl font-bold;
 }
 
 h3 {
-    @apply font-bold text-base;
+    @apply text-base font-bold;
 }
 
 input[type='text'],
@@ -31,35 +31,35 @@ input[type='email'],
 input[type='password'],
 textarea,
 select {
-    @apply p-2 border rounded-sm min-w-20 box-border disabled:cursor-not-allowed disabled:bg-gray-50;
+    @apply box-border p-2 border rounded-sm min-w-20 disabled:cursor-not-allowed disabled:bg-gray-50;
 }
 
 label {
-    @apply font-semibold mb-1;
+    @apply mb-1 font-semibold;
 }
 
 .btn {
-    @apply py-2 p-4 min-w-20 rounded-sm hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-70;
+    @apply p-4 py-2 rounded-sm min-w-20 hover:opacity-70 disabled:cursor-not-allowed disabled:opacity-70;
 }
 
 .btn-primary {
-    @apply bg-primary text-white;
+    @apply text-white bg-primary;
 }
 
 .btn-secondary {
-    @apply bg-secondary text-white;
+    @apply text-white bg-secondary;
 }
 
 .btn-success {
-    @apply bg-success text-white;
+    @apply text-white bg-success;
 }
 
 .btn-error {
-    @apply bg-error text-white;
+    @apply text-white bg-error;
 }
 
 .card {
-    @apply border rounded-sm p-4;
+    @apply p-4 border rounded-sm;
 }
 
 div#__next {
@@ -77,7 +77,7 @@ header {
 
 main {
     grid-area: main;
-    @apply w-full mx-auto max-w-3xl p-4 flex flex-col flex-grow;
+    @apply flex flex-col flex-grow w-full max-w-3xl p-4 mx-auto;
 }
 
 footer {
@@ -89,5 +89,5 @@ footer {
 }
 
 #nprogress .bar {
-    @apply h-1 w-full top-0 left-0 z-50 fixed bg-primary;
+    @apply fixed top-0 left-0 z-50 w-full h-1 bg-primary;
 }

@@ -50,13 +50,13 @@ interface ILogoutFormProps {}
 
 export const LogoutForm: React.FC<ILogoutFormProps> = (props) => {
     return (
-        <div className="border rounded mb-6">
-            <div className="p-4 border-b flex flex-col">
+        <div className="mb-6 border rounded">
+            <div className="flex flex-col p-4 border-b">
                 <h2>Logout</h2>
                 <p className="my-2">Logout of this device.</p>
             </div>
-            <div className="py-2 px-4 flex justify-end bg-gray-50 min-h-16">
-                <button className="btn btn-error self-center" onClick={() => signOut()}>
+            <div className="flex justify-end px-4 py-2 bg-gray-50 min-h-16">
+                <button className="self-center btn btn-error" onClick={() => signOut()}>
                     Logout
                 </button>
             </div>
@@ -98,8 +98,8 @@ export const AdministerNameForm: React.FC<IAdministerNameFormProps> = (props) =>
                 props.updateName(e)
             })}
         >
-            <div className="border rounded mb-6">
-                <div className="p-4 border-b flex flex-col">
+            <div className="mb-6 border rounded">
+                <div className="flex flex-col p-4 border-b">
                     <h2>Your Name</h2>
                     <p className="my-2">Please enter your full name, or a display name you are comfortable with.</p>
                     <input
@@ -109,9 +109,9 @@ export const AdministerNameForm: React.FC<IAdministerNameFormProps> = (props) =>
                         {...register('name', { maxLength: props.maxLength })}
                     />
                 </div>
-                <div className="py-2 px-4 flex justify-between bg-gray-50 min-h-16">
+                <div className="flex justify-between px-4 py-2 bg-gray-50 min-h-16">
                     <p className="self-center">Please use 32 characters at maximum.</p>
-                    <button className="btn btn-success self-center" disabled={!isDirty}>
+                    <button className="self-center btn btn-success" disabled={!isDirty}>
                         Save
                     </button>
                 </div>
@@ -159,7 +159,7 @@ export const AdministerAvatarForm: React.FC<IAdministerAvatarForm> = (props) => 
     }, [file])
 
     return (
-        <div className="border rounded mb-6">
+        <div className="mb-6 border rounded">
             <div className="flex justify-between p-4 border-b">
                 <div>
                     <h2>Your Avatar</h2>
@@ -175,7 +175,7 @@ export const AdministerAvatarForm: React.FC<IAdministerAvatarForm> = (props) => 
                 />
                 <input {...getInputProps()} />
             </div>
-            <div className="py-2 px-4 flex justify-between bg-gray-50 min-h-16">
+            <div className="flex justify-between px-4 py-2 bg-gray-50 min-h-16">
                 <p className="self-center">An avatar is optional but strongly recommended.</p>
             </div>
         </div>

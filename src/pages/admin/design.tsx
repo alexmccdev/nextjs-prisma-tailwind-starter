@@ -11,15 +11,15 @@ const DesignPage: React.FC<IDesignPageProps> = (props) => {
 
     return (
         <Layout title="Design">
-            <span role="button" className="underline text-right" onClick={() => setDisabled((prev) => !prev)}>
+            <span role="button" className="text-right underline" onClick={() => setDisabled((prev) => !prev)}>
                 Toggle state: {disabled ? 'Disabled' : 'Active'}
             </span>
             <div className="flex flex-col mb-10">
                 <h1>Buttons</h1>
-                <button disabled={disabled} className="btn btn-primary mb-2">
+                <button disabled={disabled} className="mb-2 btn btn-primary">
                     Primary
                 </button>
-                <button disabled={disabled} className="btn btn-secondary mb-2">
+                <button disabled={disabled} className="mb-2 btn btn-secondary">
                     Secondary
                 </button>
             </div>

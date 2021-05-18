@@ -2,7 +2,7 @@ interface ILoadingProps {}
 
 export const Loading: React.FC<ILoadingProps> = () => {
     return (
-        <div className="flex flex-col flex-grow justify-center items-center">
+        <div className="flex flex-col items-center justify-center flex-grow">
             <svg
                 width="38"
                 height="38"
