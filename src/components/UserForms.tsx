@@ -22,7 +22,6 @@ export const LoginForm: React.FC<ILoginFormProps> = () => {
         await signIn('email', { ...loginData, callbackUrl: '/' })
     }
 
-    console.log(isDirty, isValid, errors)
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <h2 className="mb-4">Login</h2>

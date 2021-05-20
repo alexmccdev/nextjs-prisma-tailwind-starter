@@ -21,7 +21,8 @@
             "@hooks/*": ["hooks/*"],
             "@api/*": ["pages/api/*"],
             "@contexts/*": ["contexts/*"],
-            "@utils/*": ["utils/*"]
+            "@utils/*": ["utils/*"],
+            "@types": ["types"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/api/auth/[...nextauth].ts"],

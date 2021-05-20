@@ -1,17 +1,18 @@
+import { GET as GetUser } from '@api/user'
 import Layout from '@components/shared/Layout'
+import { SafeUser } from '@types'
 import { GetServerSideProps } from 'next'
-import { UserSessionData } from 'next-auth'
 import { getSession } from 'next-auth/client'
 import React from 'react'
 
 interface IHomePageProps {
-    user: UserSessionData
+    user: SafeUser
 }
 
 const HomePage: React.FC<IHomePageProps> = (props) => {
     return (
         <Layout>
-            <pre>Current User Session:</pre>
+            <pre>Current User:</pre>
             <pre>{JSON.stringify(props.user, null, 4)}</pre>
         </Layout>
     )
@@ -28,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     return {
         props: {
-            user: session.user,
+            user: await GetUser(session.user.id),
         },
     }
 }

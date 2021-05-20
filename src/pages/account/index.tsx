@@ -2,36 +2,37 @@ import { GET as GetUser } from '@api/user'
 import Layout from '@components/shared/Layout'
 import { AdministerAvatarForm, AdministerNameForm, LogoutForm } from '@components/UserForms'
 import useToast from '@hooks/useToast'
+import useUser from '@hooks/useUser'
 import { Prisma, User } from '@prisma/client'
 import axios from 'axios'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/client'
 import React from 'react'
-import useSWR, { trigger } from 'swr'
+import { SafeUser } from 'types'
 
 interface AccountPageProps {
-    user: User
+    user: SafeUser
 }
 
 const AccountPage: React.FC<AccountPageProps> = (props) => {
-    const { data: user, mutate } = useSWR('/api/user', {
+    const { user, mutateUserCache, refreshUserCache } = useUser({
         initialData: props.user,
     })
 
     const { showError, showSuccess } = useToast()
 
     const handleUpdateUser = async (userUpdates: Prisma.UserUpdateInput) => {
-        mutate({ ...user, ...userUpdates } as User, false)
+        mutateUserCache({ ...user, ...userUpdates } as User, false)
 
         const { data } = await axios.patch('/api/user', { ...userUpdates })
 
         if (!data.error) {
-            showSuccess('User updated')
+            showSuccess('Your account was updated!')
         } else {
             showError(data.error)
         }
 
-        trigger('/api/user')
+        refreshUserCache(false)
     }
 
     return (
@@ -58,7 +59,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     return {
         props: {
-            user: JSON.parse(JSON.stringify(await GetUser(session.user.id))),
+            user: await GetUser(session.user.id),
         },
     }
 }

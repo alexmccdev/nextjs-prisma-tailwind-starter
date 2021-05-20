@@ -21,3 +21,10 @@ declare global {
         }
     }
 }
+
+export type SafeUser = {
+    name: string | null
+    email: string
+    avatar: string | null
+    role: Role
+}

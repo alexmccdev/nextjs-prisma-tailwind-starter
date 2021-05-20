@@ -1,14 +1,8 @@
-import { Prisma, Role, User } from '@prisma/client'
+import { Prisma, User } from '@prisma/client'
 import prisma from '@utils/prisma'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/client'
-
-type SafeUser = {
-    name: string | null
-    email: string
-    avatar: string | null
-    role: Role
-}
+import { SafeUser } from 'types'
 
 export const GET = async (id: string) => {
     try {
