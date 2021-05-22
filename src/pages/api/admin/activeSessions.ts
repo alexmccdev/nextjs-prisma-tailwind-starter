@@ -26,7 +26,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const session = await getSession({ req })
 
     if (!session) {
-        return res.json(null)
+        return res.status(401).end()
     }
 
     switch (req.method) {

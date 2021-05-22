@@ -16,7 +16,11 @@ const AdminPage: React.FC<IAdminPageProps> = (props) => {
     const { data: sessions } = useSWR('/api/admin/activeSessions')
 
     if (!sessions) {
-        return <Loading />
+        return (
+            <Layout>
+                <Loading />
+            </Layout>
+        )
     }
 
     return (

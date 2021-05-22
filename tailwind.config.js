@@ -12,8 +12,8 @@ module.exports = {
                 serif: defaultTheme.fontFamily.serif,
             },
             colors: {
-                primary: colors.blue[300],
-                secondary: colors.blue[800],
+                primary: colors.blue[800],
+                secondary: colors.blue[500],
                 success: colors.green[500],
                 warn: colors.yellow[500],
                 error: colors.red[500],

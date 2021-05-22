@@ -12,6 +12,7 @@
         "axios": "^0.21.1",
         "cross-env": "^7.0.3",
         "cuid": "^2.1.8",
+        "framer-motion": "^4.1.17",
         "next": "^10.2.0",
         "next-auth": "^3.23.1",
         "nprogress": "^0.2.0",

@@ -1,5 +1,6 @@
 import Header from '@components/shared/Header'
 import TopProgress from '@components/shared/Progress'
+import { AnimatePresence, motion } from 'framer-motion'
 import Head from 'next/head'
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
@@ -16,7 +17,11 @@ const Layout: React.FC<ILayoutProps> = ({ title, children }) => {
             </Head>
             <TopProgress />
             <Header />
-            <main>{children}</main>
+            <AnimatePresence exitBeforeEnter>
+                <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                    {children}
+                </motion.main>
+            </AnimatePresence>
             <ToastContainer
                 position="bottom-center"
                 autoClose={5000}
