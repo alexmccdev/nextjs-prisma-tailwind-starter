@@ -1,6 +1,6 @@
 import useSWR, { SWRConfiguration, trigger } from 'swr'
 
-const useUser = (options: SWRConfiguration) => {
+const useUser = (options?: SWRConfiguration) => {
     const ENDPOINT = '/api/user'
 
     const { data: user, mutate: mutateUserCache, error } = useSWR(ENDPOINT, options)
