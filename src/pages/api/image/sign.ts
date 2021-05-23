@@ -3,10 +3,10 @@ import cuid from 'cuid'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/client'
 
-const bucketName = process.env.AWS_BUCKET_NAME
-const region = process.env.AWS_BUCKET_REGION
-const accessKeyId = process.env.AWS_ACCESS_KEY
-const secretAccessKey = process.env.AWS_SECRET_KEY
+const bucketName = process.env.CUSTOM_AWS_BUCKET_NAME
+const region = process.env.CUSTOM_AWS_BUCKET_REGION
+const accessKeyId = process.env.CUSTOM_AWS_ACCESS_KEY
+const secretAccessKey = process.env.CUSTOM_AWS_SECRET_KEY
 
 const s3 = new AWS.S3({
     signatureVersion: 'v4',
