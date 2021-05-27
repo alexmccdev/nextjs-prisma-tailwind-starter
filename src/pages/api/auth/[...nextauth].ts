@@ -1,11 +1,12 @@
 import { User } from '@prisma/client'
+import { sendVerificationRequest } from '@utils/email'
 import prisma from '@utils/prisma'
 import NextAuth, { Session } from 'next-auth'
 import Adapters from 'next-auth/adapters'
 import { NextApiRequest, NextApiResponse } from 'next-auth/internals/utils'
-import Providers from 'next-auth/providers'
+import Providers, { EmailConfig } from 'next-auth/providers'
 
-let emailProviderOptions = {
+let emailProviderOptions: Partial<EmailConfig> = {
     server: {
         host: process.env.SMTP_HOST,
         port: Number(process.env.SMTP_PORT),
@@ -23,6 +24,12 @@ if (process.env.NODE_ENV !== 'production') {
     emailProviderOptions.sendVerificationRequest = ({ identifier: email, url }) => {
         console.log('\x1b[32m%s\x1b[0m', `Magic Link for ${email}:`)
         console.log('\x1b[32m%s\x1b[0m', url)
+    }
+}
+
+if (process.env.NODE_ENV === 'production') {
+    emailProviderOptions.sendVerificationRequest = ({ identifier: email, url }) => {
+        return sendVerificationRequest(email, url)
     }
 }
 
