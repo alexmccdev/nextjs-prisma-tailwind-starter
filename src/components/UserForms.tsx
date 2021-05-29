@@ -281,10 +281,10 @@ export const AvatarCropperModal: React.FC<IAvatarCropperModal> = (props) => {
                 <canvas ref={previewCanvasRef} className="hidden" />
             </div>
             <div className="flex justify-center mt-4">
-                <button className="mr-2 btn" onClick={uploadPhoto} disabled={isUploading}>
+                <button className="mr-2 btn btn-success" onClick={uploadPhoto} disabled={isUploading}>
                     Save
                 </button>
-                <button className="ml-2 btn" onClick={props.hideModal} disabled={isUploading}>
+                <button className="ml-2 btn btn-error" onClick={props.hideModal} disabled={isUploading}>
                     Cancel
                 </button>
             </div>
