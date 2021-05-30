@@ -1,12 +1,12 @@
-import { GET as GetUser } from '@api/user'
+import { GetUser as GetUser } from '@api/user'
 import Layout from '@components/shared/Layout'
 import { AdministerAvatarForm, AdministerNameForm, LogoutForm } from '@components/UserForms'
 import useToast from '@hooks/useToast'
 import useUser from '@hooks/useUser'
 import { Prisma, User } from '@prisma/client'
+import { getAuthenticatedServerSideProps } from '@utils/middleware'
 import axios from 'axios'
 import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/client'
 import React from 'react'
 import { SafeUser } from 'types'
 
@@ -48,20 +48,12 @@ const AccountPage: React.FC<AccountPageProps> = (props) => {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const session = await getSession(context)
-
-    if (!session) {
-        return {
-            redirect: { permanent: false, destination: '/login' },
-        }
-    }
-
+export const getServerSideProps: GetServerSideProps = getAuthenticatedServerSideProps(async (_, session) => {
     return {
         props: {
-            user: await GetUser(session.user.id),
+            user: (await GetUser(session.user.id)) as SafeUser,
         },
     }
-}
+})
 
 export default AccountPage

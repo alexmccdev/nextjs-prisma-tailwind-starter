@@ -1,15 +1,15 @@
 import { Avatar } from '@components/shared/Avatar'
 import useUser from '@hooks/useUser'
+import { useSession } from 'next-auth/client'
 import Link from 'next/link'
-import router from 'next/router'
 import React from 'react'
 
 interface IHeaderProps {}
 
 const Header: React.FC<IHeaderProps> = () => {
-    const { user, loading } = useUser()
+    const [session, sessionLoading] = useSession()
 
-    if (loading) {
+    if (sessionLoading || !session) {
         return (
             <header>
                 <SiteLogo />
@@ -17,22 +17,20 @@ const Header: React.FC<IHeaderProps> = () => {
         )
     }
 
+    const { user, loading: userLoading } = useUser()
+
     return (
         <header>
             <SiteLogo />
-            <div className="flex items-center">
-                {user ? (
+            {!userLoading && (
+                <div className="flex items-center">
                     <Link href="/account">
                         <a>
                             <Avatar src={user.avatar as string} alt={user.name} />
                         </a>
                     </Link>
-                ) : (
-                    <button className="btn btn-primary" onClick={() => router.push('/login')}>
-                        Login
-                    </button>
-                )}
-            </div>
+                </div>
+            )}
         </header>
     )
 }

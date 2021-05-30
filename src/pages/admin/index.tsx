@@ -1,10 +1,8 @@
-import { Role } from '.prisma/client'
-import { GET as GetUser } from '@api/user'
 import Layout from '@components/shared/Layout'
 import { Loading } from '@components/shared/Loading'
 import { SafeUser } from '@types'
+import { getAuthenticatedServerSideProps } from '@utils/middleware'
 import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/client'
 import React from 'react'
 import useSWR from 'swr'
 
@@ -30,26 +28,6 @@ const AdminPage: React.FC<IAdminPageProps> = (props) => {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const session = await getSession(context)
-
-    if (!session) {
-        return {
-            redirect: { permanent: false, destination: '/login' },
-        }
-    }
-
-    const user = await GetUser(session.user.id)
-
-    if ((user as SafeUser).role !== Role.ADMIN) {
-        return {
-            redirect: { permanent: false, destination: '/' },
-        }
-    }
-
-    return {
-        props: {},
-    }
-}
+export const getServerSideProps: GetServerSideProps = getAuthenticatedServerSideProps(null, 'ADMIN')
 
 export default AdminPage

@@ -1,8 +1,11 @@
+import { IncomingMessage } from 'http'
+import 'next'
 import 'next-auth'
+import { Session } from 'next-auth'
 
 declare module 'next-auth' {
     interface Session extends Record<string, unknown> {
-        user?: UserSessionData
+        user: UserSessionData
         expires?: string
     }
 
@@ -27,4 +30,10 @@ export type SafeUser = {
     email: string
     avatar: string | null
     role: Role
+}
+
+declare module 'next' {
+    export interface NextApiRequest extends IncomingMessage {
+        session: Session
+    }
 }

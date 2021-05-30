@@ -1,15 +1,19 @@
 import Layout from '@components/shared/Layout'
+import UncontrolledLottie from '@components/shared/UncontrolledLottie'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/client'
 import Link from 'next/link'
 import React from 'react'
+import MailSend from '../../animations/MailSend.json'
 
 const VerifyEmail = () => {
     return (
         <Layout title="Verify">
-            <h2 className="mb-4">Check Email</h2>
-            <p>Please check your email inbox and click on the provided link to verify your account.</p>
-            <Link href="/login">Back to Login</Link>
+            <UncontrolledLottie animationData={MailSend} />
+            <p className="mx-auto mb-4">A verification link has been sent to your email!</p>
+            <button className="mx-auto btn btn-primary">
+                <Link href="/login">Back to Login</Link>
+            </button>
         </Layout>
     )
 }

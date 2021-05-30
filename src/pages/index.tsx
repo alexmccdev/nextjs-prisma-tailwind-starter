@@ -1,19 +1,17 @@
-import { GET as GetUser } from '@api/user'
 import Layout from '@components/shared/Layout'
-import { SafeUser } from '@types'
 import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/client'
+import { getSession, useSession } from 'next-auth/client'
 import React from 'react'
 
-interface IHomePageProps {
-    user: SafeUser
-}
+interface IHomePageProps {}
 
-const HomePage: React.FC<IHomePageProps> = (props) => {
+const HomePage: React.FC<IHomePageProps> = () => {
+    const [session] = useSession()
+
     return (
-        <Layout>
+        <Layout title="Home">
             <pre>Current User:</pre>
-            <pre>{JSON.stringify(props.user, null, 4)}</pre>
+            <pre>{JSON.stringify(session.user, null, 4)}</pre>
         </Layout>
     )
 }
@@ -23,13 +21,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     if (!session) {
         return {
+            props: {},
             redirect: { permanent: false, destination: '/login' },
         }
     }
 
     return {
         props: {
-            user: await GetUser(session.user.id),
+            session,
         },
     }
 }

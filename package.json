@@ -3,9 +3,11 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
+        "debug": "cross-env NODE_OPTIONS='--inspect' next dev",
+        "dev": "next dev",
         "build": "next build",
-        "start": "next start"
+        "start": "next start",
+        "prisma": "npx prisma studio"
     },
     "dependencies": {
         "@sendgrid/mail": "^7.4.4",
@@ -22,6 +24,7 @@
         "react-dropzone": "^11.3.2",
         "react-hook-form": "^7.6.1",
         "react-image-crop": "^8.6.9",
+        "react-lottie": "^1.2.3",
         "react-modal-hook": "^3.0.0",
         "react-toastify": "^7.0.4",
         "swr": "^0.5.6"
@@ -35,6 +38,7 @@
         "@types/react": "^17.0.6",
         "@types/react-dropzone": "^5.1.0",
         "@types/react-image-crop": "^8.1.2",
+        "@types/react-lottie": "^1.2.5",
         "autoprefixer": "^10.2.5",
         "postcss": "^8.2.15",
         "prisma": "^2.22.1",

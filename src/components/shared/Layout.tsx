@@ -18,7 +18,12 @@ const Layout: React.FC<ILayoutProps> = ({ title, children }) => {
             <TopProgress />
             <Header />
             <AnimatePresence exitBeforeEnter>
-                <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                <motion.main
+                    className="flex flex-col"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                >
                     {children}
                 </motion.main>
             </AnimatePresence>

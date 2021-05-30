@@ -1,7 +1,6 @@
-import { GET as GetUser } from '@api/user'
 import Layout from '@components/shared/Layout'
+import { getAuthenticatedServerSideProps } from '@utils/middleware'
 import { GetServerSideProps } from 'next'
-import { getSession } from 'next-auth/client'
 import { useState } from 'react'
 
 interface IDesignPageProps {}
@@ -97,26 +96,6 @@ const DesignPage: React.FC<IDesignPageProps> = (props) => {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const session = await getSession(context)
-
-    if (!session) {
-        return {
-            redirect: { permanent: false, destination: '/login' },
-        }
-    }
-
-    const user = JSON.parse(JSON.stringify(await GetUser(session.user.id)))
-
-    if (user?.role !== 'ADMIN') {
-        return {
-            redirect: { permanent: false, destination: '/login' },
-        }
-    }
-
-    return {
-        props: {},
-    }
-}
+export const getServerSideProps: GetServerSideProps = getAuthenticatedServerSideProps(null, 'ADMIN')
 
 export default DesignPage
