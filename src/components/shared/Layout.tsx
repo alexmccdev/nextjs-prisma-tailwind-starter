@@ -7,9 +7,10 @@ import { ToastContainer } from 'react-toastify'
 
 interface ILayoutProps {
     title?: string
+    template: 'three-col' | 'one-col'
 }
 
-const Layout: React.FC<ILayoutProps> = ({ title, children }) => {
+const Layout: React.FC<ILayoutProps> = ({ title, template, children }) => {
     return (
         <>
             <Head>
@@ -19,7 +20,7 @@ const Layout: React.FC<ILayoutProps> = ({ title, children }) => {
             <Header />
             <AnimatePresence exitBeforeEnter>
                 <motion.main
-                    className="flex flex-col"
+                    className={template}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}

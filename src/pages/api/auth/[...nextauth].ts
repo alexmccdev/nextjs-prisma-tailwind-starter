@@ -48,6 +48,9 @@ const options = {
             session.user = { id: token.id }
             return session
         },
+        async redirect(url: string, baseUrl: string) {
+            return url.startsWith(baseUrl) ? Promise.resolve(url) : Promise.resolve(baseUrl)
+        },
     },
     debug: process.env.NODE_ENV !== 'production' && process.env.NEXTAUTH_LOG === 'true',
     adapter: Adapters.Prisma.Adapter({

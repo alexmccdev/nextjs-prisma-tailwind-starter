@@ -36,7 +36,7 @@ const AccountPage: React.FC<AccountPageProps> = (props) => {
     }
 
     return (
-        <Layout title="Account">
+        <Layout title="Account" template="one-col">
             <AdministerNameForm name={user.name} updateName={handleUpdateUser} maxLength={32} />
             <AdministerAvatarForm
                 avatar={user.avatar}

@@ -25,8 +25,8 @@ const Header: React.FC<IHeaderProps> = () => {
             {!userLoading && (
                 <div className="flex items-center">
                     <Link href="/account">
-                        <a>
-                            <Avatar src={user.avatar as string} alt={user.name} />
+                        <a className="ml-4">
+                            <Avatar size="small" src={user.avatar as string} alt={user.name} />
                         </a>
                     </Link>
                 </div>
@@ -38,13 +38,10 @@ const Header: React.FC<IHeaderProps> = () => {
 interface ISiteLogoProps {}
 
 const SiteLogo: React.FC<ISiteLogoProps> = () => {
-    const siteName = process.env.NEXT_PUBLIC_SITE_NAME
     return (
-        <Link href="/">
-            <a className="flex h-full">
-                <h1 className="self-center" title={siteName}>
-                    {siteName}
-                </h1>
+        <Link href="/home">
+            <a className="flex my-auto">
+                <img src="/vercel.svg" className="h-6" />
             </a>
         </Link>
     )

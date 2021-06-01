@@ -9,7 +9,7 @@ const DesignPage: React.FC<IDesignPageProps> = (props) => {
     const [disabled, setDisabled] = useState(false)
 
     return (
-        <Layout title="Design">
+        <Layout title="Design" template="one-col">
             <span role="button" className="text-right underline" onClick={() => setDisabled((prev) => !prev)}>
                 Toggle state: {disabled ? 'Disabled' : 'Active'}
             </span>

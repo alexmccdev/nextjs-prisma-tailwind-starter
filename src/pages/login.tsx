@@ -8,7 +8,7 @@ interface ILoginPageProps {}
 
 const LoginPage: React.FC<ILoginPageProps> = () => {
     return (
-        <Layout title="Login">
+        <Layout title="Login" template="one-col">
             <LoginForm />
         </Layout>
     )
@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (session) {
         return {
             props: {},
-            redirect: { permanent: false, destination: '/' },
+            redirect: { permanent: false, destination: '/home' },
         }
     }
 

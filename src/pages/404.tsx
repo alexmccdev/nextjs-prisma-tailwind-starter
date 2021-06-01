@@ -5,7 +5,7 @@ interface ICustom404PageProps {}
 
 const Custom404Page: React.FC<ICustom404PageProps> = () => {
     return (
-        <Layout>
+        <Layout template="one-col">
             <h1>Try again, son.</h1>
         </Layout>
     )

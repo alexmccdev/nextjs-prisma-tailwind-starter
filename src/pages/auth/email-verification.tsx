@@ -8,7 +8,7 @@ import MailSend from '../../animations/MailSend.json'
 
 const VerifyEmail = () => {
     return (
-        <Layout title="Verify">
+        <Layout title="Verify" template="one-col">
             <UncontrolledLottie animationData={MailSend} />
             <p className="mx-auto mb-4">A verification link has been sent to your email!</p>
             <button className="mx-auto btn btn-primary">
@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     if (session) {
         return {
-            redirect: { permanent: false, destination: '/' },
+            redirect: { permanent: false, destination: '/home' },
         }
     }
 

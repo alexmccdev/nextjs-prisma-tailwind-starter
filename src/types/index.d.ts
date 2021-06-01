@@ -14,17 +14,6 @@ declare module 'next-auth' {
     }
 }
 
-declare global {
-    namespace NodeJS {
-        interface Global {
-            document: Document
-            window: Window
-            navigator: Navigator
-            prisma: PrismaClient
-        }
-    }
-}
-
 export type SafeUser = {
     name: string | null
     email: string

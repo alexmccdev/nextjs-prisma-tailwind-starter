@@ -19,7 +19,7 @@ export const LoginForm: React.FC<ILoginFormProps> = () => {
     } = useForm({ mode: 'onChange' })
 
     const onSubmit = async (loginData: { email: string }) => {
-        await signIn('email', { ...loginData, callbackUrl: '/' })
+        await signIn('email', { ...loginData, callbackUrl: process.env.NEXT_PUBLIC_SITE_URL + '/home' })
     }
 
     return (
